@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace wobble.src.Request
+namespace wobble.src.Requests
 {
     public class RegisterRequest
     {

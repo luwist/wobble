@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using wobble.src.Request;
+using wobble.src.Requests;
 using wobble.src.Response;
 
 namespace wobble.src.Services

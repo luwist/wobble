@@ -1,17 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using wobble.src.Exceptions;
-using wobble.src.Request;
+using wobble.src.Requests;
 using wobble.src.Response;
 using wobble.src.Services;
+using wobble.src.Validators;
 
 namespace wobble.src.Controllers
 {
     [ApiController]
-    [Route("api/auth")]
+    [Route("auth")]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
@@ -26,9 +24,14 @@ namespace wobble.src.Controllers
         {
             try
             {
+                RegisterRequestValidator validator = new RegisterRequestValidator();
+                ValidationResult result = validator.Validate(request);
+
+                if (!result.IsValid) return BadRequest(result.Errors);
+
                 RegisterResponse registerResponse = await this._authService.Register(request);
                 
-                return Created();
+                return Ok(registerResponse);
             }
             catch (AlreadyExistsException)
             {
@@ -41,6 +44,11 @@ namespace wobble.src.Controllers
         {
             try
             {
+                LoginRequestValidator validator = new LoginRequestValidator();
+                ValidationResult result = validator.Validate(request);
+
+                if (!result.IsValid) return BadRequest(result.Errors);
+
                 LoginResponse loginResponse = await this._authService.Login(request);
                 
                 return Ok(loginResponse);
