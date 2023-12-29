@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using wobble.src.Models;
 using wobble.src.Requests;
 using wobble.src.Services;
 
@@ -18,9 +19,9 @@ namespace wobble.src.Controllers
         [HttpPost]
         public async Task<IActionResult> Upload(UploadRequest request)
         {
-            await this._uploadService.Upload(request);
+            Photo photo = await this._uploadService.Upload(request);
 
-            return Ok();
+            return Ok(photo);
         }
     }
 }

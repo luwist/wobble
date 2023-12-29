@@ -10,5 +10,7 @@ namespace wobble.src.Models
         public string Password { get; set; } = null!;
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
+
+        public ICollection<Photo> Photos { get; } = new List<Photo>();
     }
 }

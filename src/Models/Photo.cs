@@ -10,5 +10,8 @@ namespace wobble.src.Models
         public string Path { get; set; } = null!;
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
+
+        public int UserId { get; set; }
+        public User User { get; set; } = null!;
     }
 }

@@ -16,7 +16,7 @@ namespace wobble.src.Controllers
         }
 
         [HttpGet("{filename}")]
-        public IActionResult Show(string filename)
+        public IActionResult Get(string filename)
         {
             try
             {

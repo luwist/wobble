@@ -6,8 +6,7 @@ namespace wobble.src.Services
     {
         public FileStream Get(string filename)
         {
-            string directory = Path.Combine(Directory.GetCurrentDirectory(), "src", "Uploads");
-            string path = Path.Combine(directory, filename);
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "src", "Uploads", filename);
 
             if (!System.IO.File.Exists(path)) throw new NotFoundException();
 

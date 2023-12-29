@@ -5,6 +5,6 @@ namespace wobble.src.Respositories
 {
     public interface IPhotoRepository
     {
-        Task<Photo> Create(UploadRequest request);
+        Task<Photo> Create(UploadRequest request, string filename);
     }
 }

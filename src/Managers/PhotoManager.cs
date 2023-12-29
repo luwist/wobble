@@ -1,3 +1,5 @@
+using SixLabors.ImageSharp;
+
 namespace wobble.src.Managers
 {
     public class PhotoManager
@@ -43,19 +45,36 @@ namespace wobble.src.Managers
             }
         }
 
-        public PhotoManager(IFormFile photo)
+        private string _path;
+
+        public PhotoManager(IFormFile photo, string filename)
         {
             this._photo = photo;
+            this._path = Path.Combine(Directory.GetCurrentDirectory(), "src", "Uploads", filename);
         }
 
         private int GetWidth()
         {
-            return 0;
+            int width;
+
+            using (Image image = Image.Load(this._path))
+            {
+                width = image.Width;
+            }
+
+            return width;
         }
 
         private int GetHeight()
         {
-            return 0;
+            int height;
+
+            using (Image image = Image.Load(this._path))
+            {
+                height = image.Height;
+            }
+
+            return height;
         }
 
         private long GetSize()
@@ -70,7 +89,9 @@ namespace wobble.src.Managers
 
         private string GetExtension()
         {
-            return "";
+            string filename = this._photo.FileName;
+
+            return Path.GetExtension(filename);
         }
     }
 }

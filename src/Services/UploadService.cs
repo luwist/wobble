@@ -1,3 +1,4 @@
+using wobble.src.Models;
 using wobble.src.Requests;
 using wobble.src.Respositories;
 
@@ -12,20 +13,24 @@ namespace wobble.src.Services
             this._photoRepository = photoRepository;
         }
 
-        public async Task<bool> Upload(UploadRequest request)
+        public async Task<Photo> Upload(UploadRequest request)
         {
-            string directory = Path.Combine(Directory.GetCurrentDirectory(), "src", "Uploads");
+            IFormFile file = request.File;
 
-            string path = Path.Combine(directory, request.File.FileName);
+            string filename = request.File.FileName;
+            string extension = Path.GetExtension(filename);
+            string newFilename = $"{Guid.NewGuid()}{extension}";
 
-            using (FileStream stream = File.Create(path))
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "src", "Uploads", newFilename);
+
+            using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
             {
-                await request.File.CopyToAsync(stream);
+                await file.CopyToAsync(fileStream);
             }
 
-            // await this._photoRepository.Create(request);
+            Photo photo = await this._photoRepository.Create(request, newFilename);
 
-            return true;
+            return photo;
         }
     }
 }

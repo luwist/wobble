@@ -14,9 +14,9 @@ namespace wobble.src.Respositories
             this._dbContext = applicationDbContext;
         }
 
-        public async Task<Photo> Create(UploadRequest request)
+        public async Task<Photo> Create(UploadRequest request, string filename)
         {
-            PhotoManager photoManager = new PhotoManager(request.File);
+            PhotoManager photoManager = new PhotoManager(request.File, filename);
 
             Photo photo = new Photo
             {
@@ -24,7 +24,7 @@ namespace wobble.src.Respositories
                 Width = photoManager.Width,
                 Height = photoManager.Height,
                 Size = photoManager.Size,
-                Path = $"Uploads/{request.File.FileName}",
+                Path = filename,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = null
             };
