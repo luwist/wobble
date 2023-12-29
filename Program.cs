@@ -41,6 +41,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Dependency injection
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUploadService, UploadService>();
+builder.Services.AddScoped<IPhotoService, PhotoService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPhotoRepository, PhotoRepository>();
 builder.Services.AddScoped<ITokenManager, TokenManager>();
