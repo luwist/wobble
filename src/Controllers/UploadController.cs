@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using wobble.src.Models;
 using wobble.src.Requests;
@@ -5,6 +6,7 @@ using wobble.src.Services;
 
 namespace wobble.src.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("upload")]
     public class UploadController : ControllerBase
