@@ -1,14 +1,16 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using wobble.src.Exceptions;
 using wobble.src.Services;
 
 namespace wobble.src.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("photos")]
     public class PhotoController : ControllerBase
     {
-        private IPhotoService _photoService;
+        private readonly IPhotoService _photoService;
 
         public PhotoController(IPhotoService photoService)
         {

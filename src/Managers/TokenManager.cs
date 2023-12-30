@@ -17,9 +17,9 @@ namespace wobble.src.Managers
 
         public string CreateToken(User user)
         {
-            var claims = new[]
+            Claim[] claims = new[]
             {
-                new Claim("id", user.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim("firstName", user.FirstName),
                 new Claim("lastName", user.LastName),
                 new Claim("username", user.Username),
@@ -30,7 +30,7 @@ namespace wobble.src.Managers
             SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this._config.GetSection("Jwt")["Key"]));
             SigningCredentials credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(
+            JwtSecurityToken token = new JwtSecurityToken(
                 issuer: this._config.GetSection("Jwt")["Issuer"],
                 audience: this._config.GetSection("Jwt")["Audience"],
                 claims: claims,
